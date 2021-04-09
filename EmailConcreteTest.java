@@ -174,4 +174,12 @@ public class EmailConcreteTest {
 		email.getMailSession();
 		//because no host name
 	}
+
+@Test
+	public void testGetSentDate() throws Exception{
+		//can't really mock sent date being null, because it'll return current date
+		Date someDate = new Date();
+		email.setSentDate(someDate);
+		assertEquals(someDate, email.getSentDate());
+	}	
 }
