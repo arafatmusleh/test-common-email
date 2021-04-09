@@ -53,4 +53,29 @@ public class EmailConcreteTest {
 		exception.expect(Exception.class);
 		email.addCc(EMPTY_STRING);
 	}
+
+	@Test
+	public void testAddHeaderInvalidNameAndValue() throws Exception {
+		exception.expect(IllegalArgumentException.class);
+		email.addHeader(EMPTY_STRING, EMPTY_STRING);
+	}
+	@Test
+	public void testAddHeaderValidNameInvalidValue() throws Exception {
+		exception.expect(IllegalArgumentException.class);
+		email.addHeader(VALID_NON_EMPTY_STRING, EMPTY_STRING);
+	}
+	@Test
+	public void testAddHeaderInvalidNameValidValue() throws Exception {
+		exception.expect(IllegalArgumentException.class);
+		email.addHeader(EMPTY_STRING, VALID_NON_EMPTY_STRING);
+	}
+	@Test
+	public void testAddHeaderValidNameAndValue() throws Exception {
+		
+		email.addHeader(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		
+		//not sure if I was allowed to do this, but I added getHeaderCount()
+		//not aware of another way to do this, header is protected
+		assertEquals(1,email.getHeaderCount());
+	}
 }
