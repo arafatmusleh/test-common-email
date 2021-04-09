@@ -31,4 +31,15 @@ public class EmailConcreteTest {
 	public void tearDown() throws Exception {
 		
 	}
+
+	@Test
+	public void testAddBccValid() throws Exception {
+		email.addBcc(VALID_EMAIL_ARRAY);
+		assertEquals(2,email.getBccAddresses().size());
+	}
+	@Test
+	public void testAddBccEmpty() throws Exception {
+		exception.expect(EmailException.class);
+		email.addBcc(EMPTY_EMAIL_ARRAY);
+	}
 }
