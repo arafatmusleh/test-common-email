@@ -156,4 +156,15 @@ public class EmailConcreteTest {
 		exception.expect(EmailException.class);;
 		email.buildMimeMessage();
 	}
+
+	@Test
+	public void testGetHostNameWhenNull() throws Exception{
+		exception.expect(EmailException.class);;
+		email.getHostName();
+	}
+	@Test
+	public void testGetHostNameValid() throws Exception{
+		email.setHostName(VALID_NON_EMPTY_STRING);
+		assertEquals(VALID_NON_EMPTY_STRING, email.getHostName());
+	}
 }
