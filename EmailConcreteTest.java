@@ -42,4 +42,15 @@ public class EmailConcreteTest {
 		exception.expect(EmailException.class);
 		email.addBcc(EMPTY_EMAIL_ARRAY);
 	}
+
+	@Test
+	public void testAddCcValid() throws Exception {
+		email.addCc(VALID_EMAIL);
+		assertEquals(1,email.getCcAddresses().size());
+	}
+	@Test
+	public void testAddCcEmpty() throws Exception {
+		exception.expect(Exception.class);
+		email.addCc(EMPTY_STRING);
+	}
 }
