@@ -167,4 +167,11 @@ public class EmailConcreteTest {
 		email.setHostName(VALID_NON_EMPTY_STRING);
 		assertEquals(VALID_NON_EMPTY_STRING, email.getHostName());
 	}
+
+@Test
+	public void testGetMailSessionWhenNull() throws Exception{
+		exception.expect(EmailException.class);;
+		email.getMailSession();
+		//because no host name
+	}
 }
