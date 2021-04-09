@@ -99,4 +99,61 @@ public class EmailConcreteTest {
 		email.addReplyTo(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
 		assertEquals(1,email.getReplyToAddresses().size());
 	}
+
+@Test
+	public void testBuildMimeMessageValid() throws Exception{
+		email.setHostName(VALID_NON_EMPTY_STRING);
+		email.setFrom(VALID_NON_EMPTY_STRING);
+		email.addTo(VALID_NON_EMPTY_STRING);
+		email.addBcc(VALID_NON_EMPTY_STRING);
+		email.addCc(VALID_NON_EMPTY_STRING);
+		email.addReplyTo(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		email.addHeader(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		email.setSubject(VALID_NON_EMPTY_STRING);
+
+
+		email.buildMimeMessage();
+		MimeMessage message = email.getMimeMessage();
+		message.saveChanges();
+		assertEquals(VALID_NON_EMPTY_STRING, message.getSubject());
+	}
+	@Test
+	public void testBuildMimeMessageNoFromAddress() throws Exception{
+		
+		email.setHostName(VALID_NON_EMPTY_STRING);
+		email.addTo(VALID_NON_EMPTY_STRING);
+		email.addCc(VALID_NON_EMPTY_STRING);
+		email.addHeader(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		email.setSubject(VALID_NON_EMPTY_STRING);
+
+
+		exception.expect(EmailException.class);;
+		email.buildMimeMessage();
+	}	
+	@Test
+	public void testBuildMimeMessageNoToAddress() throws Exception{
+		
+		email.setHostName(VALID_NON_EMPTY_STRING);
+		email.setFrom(VALID_NON_EMPTY_STRING);
+		email.addHeader(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		email.setSubject(VALID_NON_EMPTY_STRING);
+
+		exception.expect(EmailException.class);;
+		email.buildMimeMessage();
+	}
+	@Test
+	public void testBuildMimeMessageBuildingTwice() throws Exception{
+		email.setHostName(VALID_NON_EMPTY_STRING);
+		email.setFrom(VALID_NON_EMPTY_STRING);
+		email.addTo(VALID_NON_EMPTY_STRING);
+		email.addBcc(VALID_NON_EMPTY_STRING);
+		email.addCc(VALID_NON_EMPTY_STRING);
+		email.addReplyTo(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		email.addHeader(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		email.setSubject(VALID_NON_EMPTY_STRING);
+
+		email.buildMimeMessage();
+		exception.expect(EmailException.class);;
+		email.buildMimeMessage();
+	}
 }
