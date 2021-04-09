@@ -190,4 +190,10 @@ public class EmailConcreteTest {
 		email.setSocketConnectionTimeout(tempSocketConnectionTimeout);;
 		assertEquals(tempSocketConnectionTimeout, email.getSocketConnectionTimeout());
 	}	
+
+@Test
+	public void testSetFrom() throws Exception{
+		email.setFrom(VALID_NON_EMPTY_STRING);
+		assertEquals(VALID_NON_EMPTY_STRING,email.getFromAddress().toString());
+	}	
 }
