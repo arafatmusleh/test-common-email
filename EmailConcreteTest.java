@@ -182,4 +182,12 @@ public class EmailConcreteTest {
 		email.setSentDate(someDate);
 		assertEquals(someDate, email.getSentDate());
 	}	
+
+@Test
+	public void testSocketConnectionTimeoutValid() throws Exception{	
+		//can't test it being null, int datatype is primitive, 0 by default
+		final int tempSocketConnectionTimeout = 1234;
+		email.setSocketConnectionTimeout(tempSocketConnectionTimeout);;
+		assertEquals(tempSocketConnectionTimeout, email.getSocketConnectionTimeout());
+	}	
 }
