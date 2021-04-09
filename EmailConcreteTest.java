@@ -78,4 +78,25 @@ public class EmailConcreteTest {
 		//not aware of another way to do this, header is protected
 		assertEquals(1,email.getHeaderCount());
 	}
+
+@Test
+	public void testAddReplytoInValidAndName() throws Exception {
+		exception.expect(EmailException.class);
+		email.addReplyTo(EMPTY_STRING, EMPTY_STRING);
+	}
+	@Test
+	public void testAddReplytoValidEmailInvalidName() throws Exception {
+		exception.expect(EmailException.class);
+		email.addReplyTo(VALID_NON_EMPTY_STRING, EMPTY_STRING);
+	}
+	@Test
+	public void testAddReplytoInvalidEmailValidName() throws Exception {
+		exception.expect(EmailException.class);
+		email.addReplyTo(VALID_NON_EMPTY_STRING, EMPTY_STRING);
+	}
+	@Test
+	public void testAddReplytoValidEmailandName() throws Exception {
+		email.addReplyTo(VALID_NON_EMPTY_STRING, VALID_NON_EMPTY_STRING);
+		assertEquals(1,email.getReplyToAddresses().size());
+	}
 }
